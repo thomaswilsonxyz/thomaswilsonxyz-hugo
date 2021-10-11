@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	{{ partial "header.html" . }}
+	<body>
+		<div class="content">
+			{{ partial "head.html" . }}
+			
+      <!-- Section: Bio -->
+			<main class="list">
+				<section class="site-description">
+					<p class="bio__strap">I build good software and engineering teams with good<span class='bio__star'>*</span> companies
+          </p>
+          <p class="bio__strap-caveat"><span class="bio__caveat-star">*</span>{{ .Site.Params.BioStrapLineCaveat  }}</p>
+          <ul class="bio__list"> 
+            {{ range .Site.Params.BioListItems }}
+            <li class="bio__list-item"> {{ . | markdownify }} </li>
+            {{ end }}
+				</section>
+
+        <!-- Section: Archive -->
+				{{ $articles := (where .Site.RegularPages "Type" "in" .Site.Params.mainSections).GroupByDate "2006" }}
+        {{ range $articles }}
+          <h2> {{ .Key }} </h2>
+            <ul>
+              {{ range .Pages }} 
+              <li>
+                <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+                {{ if eq .Type "book-reviews" }}
+                  📚
+                {{ end }}
+              </li>
+              {{ end }}
+            </ul>
+        {{ end }}
+			</main>
+			{{ partial "footer.html" . }}
+		</div>
+		
+	</body>
+</html>

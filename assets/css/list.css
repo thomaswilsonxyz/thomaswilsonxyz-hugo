@@ -1,0 +1,12 @@
+.posts__list { 
+  line-height: 130%;
+}
+
+.posts__list-item {
+  padding-bottom: 6px;
+}
+
+.posts__list-link {
+  border-bottom: none;
+  text-decoration: underline;
+}
