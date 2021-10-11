@@ -1,0 +1,134 @@
+<!doctype html><html><head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge"><title>Why are you like this, JavaScript? Taking a look at JavaScript's single threaded nature. - Thomas Wilson</title><meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="Sometimes you hear something so often that you don&rsquo;t really hear it anymore. One of those things for me is words to the effect of &ldquo;How does this JavaScript code even run?&rdquo;. I choose to interpret this generously as &ldquo;How does JavaScript itself run&rdquo;, and not &ldquo;how does this hot garbage code you wrote run?&rdquo;.[^I really hope I don&rsquo;t write as much hot garbage JavaScript as I used to]
+There&rsquo;s a lot of ways we could describe JavaScript (including some really colourful adjectives), but objectively it is an asynchronous, single-threaded, dynamic programming language.">
+<meta property="og:image" content>
+<meta property="og:title" content="Why are you like this, JavaScript? Taking a look at JavaScript's single threaded nature.">
+<meta property="og:description" content="Sometimes you hear something so often that you don&rsquo;t really hear it anymore. One of those things for me is words to the effect of &ldquo;How does this JavaScript code even run?&rdquo;. I choose to interpret this generously as &ldquo;How does JavaScript itself run&rdquo;, and not &ldquo;how does this hot garbage code you wrote run?&rdquo;.[^I really hope I don&rsquo;t write as much hot garbage JavaScript as I used to]
+There&rsquo;s a lot of ways we could describe JavaScript (including some really colourful adjectives), but objectively it is an asynchronous, single-threaded, dynamic programming language.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.thomaswilson.xyz/blog/2020-08-23-why-are-you-like-this-javascript/"><meta property="article:section" content="blog">
+<meta property="article:published_time" content="2020-08-23T00:00:00+00:00">
+<meta property="article:modified_time" content="2020-08-23T00:00:00+00:00">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Why are you like this, JavaScript? Taking a look at JavaScript's single threaded nature.">
+<meta name=twitter:description content="Sometimes you hear something so often that you don&rsquo;t really hear it anymore. One of those things for me is words to the effect of &ldquo;How does this JavaScript code even run?&rdquo;. I choose to interpret this generously as &ldquo;How does JavaScript itself run&rdquo;, and not &ldquo;how does this hot garbage code you wrote run?&rdquo;.[^I really hope I don&rsquo;t write as much hot garbage JavaScript as I used to]
+There&rsquo;s a lot of ways we could describe JavaScript (including some really colourful adjectives), but objectively it is an asynchronous, single-threaded, dynamic programming language.">
+<script src=https://www.thomaswilson.xyzjs/feather.min.js></script>
+<link href=https://www.thomaswilson.xyz/css/fonts.511ddb4c3eb5cc664ffce964174cebefda4d808569e219a7e5188466aa7713e6.css rel=stylesheet>
+<link rel=stylesheet type=text/css media=screen href=https://www.thomaswilson.xyz/css/main.ecd799717c3d0b98bb2dca9498befc813ebe08241cce8dece74ccadb7dadced1.css>
+<link id=darkModeStyle rel=stylesheet type=text/css href=https://www.thomaswilson.xyz/css/dark.726cd11ca6eb7c4f7d48eb420354f814e5c1b94281aaf8fd0511c1319f7f78a4.css media="(prefers-color-scheme: dark)">
+</head>
+<body>
+<div class=content><header>
+<div class=main>
+<a href=https://www.thomaswilson.xyz>Thomas Wilson</a>
+</div>
+<nav>
+<a href=/blog>Blog</a>
+<a href=/book-reviews>Book reviews</a>
+</nav>
+</header>
+<main>
+<article>
+<div class=title>
+<h1 class=title>Why are you like this, JavaScript? Taking a look at JavaScript's single threaded nature.</h1>
+<div class=meta>Posted on Aug 23, 2020</div>
+</div>
+<section class=body>
+<p>Sometimes you hear something so often that you don&rsquo;t really hear it anymore. One of those things for me is words to the effect of &ldquo;How does this JavaScript code even run?&rdquo;. I choose to interpret this generously as &ldquo;How does JavaScript itself run&rdquo;, and not &ldquo;how does this hot garbage code you wrote run?&rdquo;.[^I really hope I don&rsquo;t write as much hot garbage JavaScript as I used to]</p>
+<p>There&rsquo;s a lot of ways we could describe JavaScript (including some really colourful adjectives), but objectively it is an asynchronous, single-threaded, dynamic programming language. These characteristics, which are deliberate design decisions, are responsible for a lot of the quirks, gotchas, and design patterns that make being JavaScript developer tricky for anyone just getting started. Luckily it&rsquo;s almost never tricky for anyone else (<em>he lied</em>).</p>
+<p>For example, have you written and run JavaScript code which:</p>
+<ul>
+<li>Ran in the browser, got in an infinite loop somewhere, and prevented all interactions with the web page (including the ability to close a tab or the browser)?</li>
+<li>Fetched data from another server, tried to access the data, and got an <code>undefined</code> or <code>Promise</code> related error?</li>
+<li>Written server-side JS with a callback/promise chain for data processing/cleaning and had your code start, but not finish, its execution of this chain - leaving the request hanging for a response.</li>
+</ul>
+<p>These are all common problems which I have encountered, realistically, hundreds of times by now. They&rsquo;re each a rough result of the design of the JS run time, i.e. how we go from JS you wrote to the commands being executed on the computer. I don&rsquo;t want to talk about JS run times / environments now, so don&rsquo;t worry about the details. Just know that the JS code you wrote is executed by the computer in a way that makes these kind of errors possible, and even likely, if you&rsquo;re not thinking like JS wants you to.</p>
+<p>Over the past couple of weeks, I&rsquo;ve been trying to understand why JS wants us to think in this way. I&rsquo;ve been asking JS &ldquo;why are you like this?&rdquo; and &ldquo;did I do something to upset you? I&rsquo;m sorry if I did, but please, this really shouldn&rsquo;t be <code>undefined</code>&rdquo;.</p>
+<h2 id=a-brief-aside-on-jss-dynamic-ness>A brief aside: on JS&rsquo;s dynamic-ness</h2>
+<p>A brief side note before we get into the rabbit hole here: JavaScript will take an awful lot of mistreatment and still run. That&rsquo;s largely because it&rsquo;s a dynamic language (i.e. it isn&rsquo;t typed), and also partly because it&rsquo;ll try and do whatever it can with whatever types of data you give it. It&rsquo;s famous for it: (<code>false == 0</code> or <code>'30' + 10 === '3010'</code>).</p>
+<p>But you better believe that you&rsquo;re renting this flexibility from JavaScript, because at some point it&rsquo;s going to <code>undefined is not a function</code> you and act like it did nothing wrong - largely because <em>it didn&rsquo;t</em>.</p>
+<p>This is an entirely different type of problems and design decisions in the language, which I&rsquo;m just not going to talk about in this article.</p>
+<h2 id=javascript-is-single-threaded>JavaScript is Single Threaded</h2>
+<p>JavaScript is single threaded, that means that while something is on the <a href=https://developer.mozilla.org/en-US/docs/Glossary/Call_stack>call stack</a> - JavaScript is unable to run anything else. Any function that gets called by anything in our JS code is going into the call stack - it&rsquo;s how the internals of our app (specifically the interpreter) knows where it is, and what it needs to do now and next.</p>
+<p>So if something long-running is being done on the call stack, like a really long iteration function, then no other functions can be called until that iteration has finished. Say that we have a list of 1 million movies as a massive array of objects, and we want to get all their titles:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>movies</span> <span style=color:#f92672>=</span> [{<span style=color:#a6e22e>title</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;A Knights Tale&#39;</span>, <span style=color:#a6e22e>rating</span><span style=color:#f92672>:</span> <span style=color:#ae81ff>10</span>}, ..]
+<span style=color:#66d9ef>const</span> <span style=color:#a6e22e>titles</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>movies</span>.<span style=color:#a6e22e>map</span>((<span style=color:#a6e22e>movie</span>) =&gt; <span style=color:#a6e22e>movie</span>.<span style=color:#a6e22e>title</span>)
+</code></pre></div><p>This <code>map</code> function will go into the call stack, it will start executing. So it&rsquo;ll go to our <code>movies</code> array, and for each item in it, run our little <em>anonymous function</em> (i.e. function without a name), and then start populating the call stack with a million of these references:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=color:#75715e>// THIS IS ALL PSEUDO CODE, PLEASE GOLLY PLEASE DON&#39;T TAKE LITERALLY
+</span><span style=color:#75715e></span>
+<span style=color:#75715e>// Find the specific `movie` from the `movies` array
+</span><span style=color:#75715e></span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>movie</span> <span style=color:#f92672>=</span> {
+  <span style=color:#a6e22e>title</span><span style=color:#f92672>:</span>  <span style=color:#e6db74>&#34;A Knights Tale&#34;</span>,
+  <span style=color:#a6e22e>rating</span><span style=color:#f92672>:</span> <span style=color:#ae81ff>10</span>,
+}
+
+<span style=color:#75715e>// Get a reference to the anonymous function
+</span><span style=color:#75715e></span><span style=color:#66d9ef>function</span>(<span style=color:#a6e22e>movie</span>) {
+  <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>movie</span>.<span style=color:#a6e22e>title</span>
+}
+
+<span style=color:#75715e>// Then: Add the above function to the call stack
+</span><span style=color:#75715e></span>
+</code></pre></div><p>This operation will block everything else from running until it&rsquo;s finished. This might sound <em>sort of</em> bad, but if we&rsquo;re often running JavaScript in the browser, that &ldquo;everything else&rdquo; can include like: rendering a web page, or allowing a user to interact with the page or browser tab.</p>
+<p>At this point you&rsquo;d want to ask why the lingua franca of the web would allow such a thing to happen. And that&rsquo;s a great question. Unfortunately, this objection doesn&rsquo;t do anything to dethrone JS and its utility in the web. The burden falls on us as engineers to design around this single-threaded ness.</p>
+<h2 id=javascript-is-asynchronous-and-event-based>JavaScript is Asynchronous and Event-Based</h2>
+<p>So, if JavaScript is single threaded, and blocks everything else from running until it finishes a function - how does it handle asynchronous functions? For example: what happens when I fetch some data remotely (e.g. an updated list of movies) - will it stop everything else from rendering?</p>
+<p>This is potentially a really bad design flaw. Especially as the modern web - which can&rsquo;t seem to help itself from making too many HTTP requests. Imagine if every time you wanted to read a BuzzFeed article you had to wait for bit of content, every external tracker, and every ad to load before anything appeared on the screen. It&rsquo;d be a nightmare and you&rsquo;d never find out which kind of Frappicino you are.</p>
+<p>JS solves this problem, by having an internal understanding of <a href=https://eloquentjavascript.net/11_async.html>asynchronous actions</a>. In the previous example, where we wanted to get a million movie titles (for some reason) - our code is <em>synchronous</em> - there is a simple <a href=https://www.computerhope.com/jargon/c/contflow.htm>Control Flow</a>: the code had a correct understanding that &ldquo;here are a million items, I need to do this one thing to each of them, one at a time&rdquo;. And thus the single JS thread was occupied with those million and one tasks.</p>
+<p>To give an async example similar to an example above, let&rsquo;s try and retrieve a list of movies across ten genres, from a single API:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=color:#75715e>// NOTE: This code is illustrative, and not perfect, pls ignore edge-cases and separation of concerns problems
+</span><span style=color:#75715e></span>
+<span style=color:#75715e>// Imaginary API
+</span><span style=color:#75715e></span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>MOVIE_URL</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;https://www.mymovieservice.com/api&#34;</span>;
+
+<span style=color:#75715e>// A list of genres
+</span><span style=color:#75715e></span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>apiEndPoints</span> <span style=color:#f92672>=</span> [
+  {
+    <span style=color:#a6e22e>label</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#34;action&#34;</span>,
+    <span style=color:#a6e22e>path</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#34;/action-movies&#34;</span>,
+    <span style=color:#a6e22e>movies</span><span style=color:#f92672>:</span> []
+  },
+  <span style=color:#75715e>// Imagine 9 others
+</span><span style=color:#75715e></span>  ..
+];
+
+<span style=color:#75715e>// Go and fetch remote data and update the array
+</span><span style=color:#75715e></span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>updatedEndPoints</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>apiEndPoints</span>.<span style=color:#a6e22e>map</span>((<span style=color:#a6e22e>endPoint</span>) =&gt; {
+  <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>fetch</span>(<span style=color:#e6db74>`</span><span style=color:#e6db74>${</span><span style=color:#a6e22e>MOVIE_URL</span><span style=color:#e6db74>}</span><span style=color:#e6db74>/</span><span style=color:#e6db74>${</span><span style=color:#a6e22e>endPoint</span>.<span style=color:#a6e22e>path</span><span style=color:#e6db74>}</span><span style=color:#e6db74>`</span>)
+    .<span style=color:#a6e22e>then</span>((<span style=color:#a6e22e>res</span>) =&gt; <span style=color:#a6e22e>res</span>.<span style=color:#a6e22e>json</span>())
+    .<span style=color:#a6e22e>then</span>((<span style=color:#a6e22e>moviesData</span>) =&gt; {
+      <span style=color:#66d9ef>return</span> {...<span style=color:#a6e22e>endPoint</span>, <span style=color:#a6e22e>movies</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>moviesData</span>.<span style=color:#a6e22e>movies</span>}
+    });
+});
+
+
+</code></pre></div><p>An intuitive understanding of asynchronous behaviour would be for JS to see a call to <code>fetch</code> and understand that it needs to:</p>
+<ol>
+<li>Make an HTTP call to the specified endpoint;</li>
+<li>Recognise that a response will come back <em>at some point</em>, so put this function aside, and get on with something else;</li>
+<li>Recognise when the data from <code>fetch</code> returns, and then do something with it (in this case, format it with <code>.json()</code> then run the anonymous data handler function to add the movies</li>
+</ol>
+<p>It&rsquo;s worth noting here that JS allows us to have this notion of asynchrony <em>without</em> asking us to manage multiple threads. This is the trade-off we are making with JS&rsquo;s design: we can have asynchronous behaviour relatively simply in our code, without having to manually manage memory threads.</p>
+<p>This post is already too long, I think, and I don&rsquo;t want to get into the specifics of how this works - but understanding that JS is able to make these kinds of decisions at run time, and when they&rsquo;re made - is an important part of writing faster, less blocking JavaScript.</p>
+</section>
+<div class=post-tags>
+<nav class="nav tags">
+<ul class=tags>
+<li><a href=/tags/javascript>javascript</a></li>
+<li><a href=/tags/why-are-you-like-this-js>why-are-you-like-this-js</a></li>
+</ul>
+</nav>
+</div>
+</article>
+</main>
+<footer>
+<hr>
+2021
+© Thomas Wilson
+</footer>
+</div>
+</body>
+</html>
