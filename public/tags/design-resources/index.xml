@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>design-resources on Thomas Wilson</title>
+    <link>https://www.thomaswilson.xyz/tags/design-resources/</link>
+    <description>Recent content in design-resources on Thomas Wilson</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-uk</language>
+    <copyright>© Thomas Wilson</copyright>
+    <lastBuildDate>Fri, 15 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://www.thomaswilson.xyz/tags/design-resources/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Design Resource: Free Fonts from Awwwards (2021)</title>
+      <link>https://www.thomaswilson.xyz/blog/design-resource-free-fonts-from-awwwards/</link>
+      <pubDate>Fri, 15 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.thomaswilson.xyz/blog/design-resource-free-fonts-from-awwwards/</guid>
+      <description>Awwwards have put out a collection of free (or free-adjacent) fonts. You can find them here.</description>
+    </item>
+    
+    <item>
+      <title>Where I go for UI inspiration</title>
+      <link>https://www.thomaswilson.xyz/blog/2020-08-07-where-i-go-for-ui-inspiration/</link>
+      <pubDate>Fri, 07 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.thomaswilson.xyz/blog/2020-08-07-where-i-go-for-ui-inspiration/</guid>
+      <description>Like anybody who makes interfaces for apps/websites, I spent a lot of time looking at Design Inspiration (read: UIs, real or imaginary, made by other people). This is a really good way to look at visual conventions that other people made, and have used in their UIs and UX.
+If I were to examine the time I spent “designing” more closely, and divided it between actually pushing pixels around in Figma, and looking at other people’s work on Dribbble I would be shocked and ashamed.</description>
+    </item>
+    
+  </channel>
+</rss>

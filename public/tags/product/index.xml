@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>product on Thomas Wilson</title>
+    <link>https://www.thomaswilson.xyz/tags/product/</link>
+    <description>Recent content in product on Thomas Wilson</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-uk</language>
+    <copyright>© Thomas Wilson</copyright>
+    <lastBuildDate>Sun, 13 Jun 2021 19:48:00 +0000</lastBuildDate><atom:link href="https://www.thomaswilson.xyz/tags/product/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>The infinite coast of problem solving</title>
+      <link>https://www.thomaswilson.xyz/blog/2021-06-13-infinite-coast-of-problem-solving/</link>
+      <pubDate>Sun, 13 Jun 2021 19:48:00 +0000</pubDate>
+      
+      <guid>https://www.thomaswilson.xyz/blog/2021-06-13-infinite-coast-of-problem-solving/</guid>
+      <description>I’m currently designing and building the lexicon, ambitiously explained as “the most useful language learning resources in the world”.
+The problem is that there’s a lot involved in that, you know? There’s theoretical questions like “what does most useful mean?” and “how do humans learn languages”?
+Then there’s small problems like “what is the shape of the JSON I send to the client?” and “how do I generate prompts &amp;amp; questions for language learning?</description>
+    </item>
+    
+  </channel>
+</rss>

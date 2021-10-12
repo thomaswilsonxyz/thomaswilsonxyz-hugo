@@ -1,5 +1,5 @@
 title = 'Thomas Wilson'
-baseURL = "https://www.thomaswilson.xyz"
+baseURL = "https://thomaswilson.xyz"
 theme = 'archie-master'
 
 languageCode = "en-uk"

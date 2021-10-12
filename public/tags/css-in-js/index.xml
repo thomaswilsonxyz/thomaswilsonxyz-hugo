@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>css-in-js on Thomas Wilson</title>
+    <link>https://www.thomaswilson.xyz/tags/css-in-js/</link>
+    <description>Recent content in css-in-js on Thomas Wilson</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-uk</language>
+    <copyright>© Thomas Wilson</copyright>
+    <lastBuildDate>Fri, 20 Sep 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://www.thomaswilson.xyz/tags/css-in-js/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>What is CSS-in-JS and why do people keep using it?</title>
+      <link>https://www.thomaswilson.xyz/blog/what-and-why-use-css-in-js/</link>
+      <pubDate>Fri, 20 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.thomaswilson.xyz/blog/what-and-why-use-css-in-js/</guid>
+      <description>The elders tell us of a time where you would build websites by literally writing your .html files. If you wanted to add some styles, you’d write them in a .css file and then &amp;lt;link rel=&amp;quot;stylesheet&amp;quot;&amp;gt; the two together. So you’d write your entire site in semantic HTML, about whatever it is people did back then (like mammoth hunting or pyramid building) and then you would ftp that onto your server, and other people could view it.</description>
+    </item>
+    
+  </channel>
+</rss>

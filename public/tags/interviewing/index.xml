@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>interviewing on Thomas Wilson</title>
+    <link>https://www.thomaswilson.xyz/tags/interviewing/</link>
+    <description>Recent content in interviewing on Thomas Wilson</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-uk</language>
+    <copyright>© Thomas Wilson</copyright>
+    <lastBuildDate>Sun, 20 Sep 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://www.thomaswilson.xyz/tags/interviewing/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>My experience finding a new job as a software engineer in summer of 2020</title>
+      <link>https://www.thomaswilson.xyz/blog/2020-09-20-interviewing-experience-2020/</link>
+      <pubDate>Sun, 20 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.thomaswilson.xyz/blog/2020-09-20-interviewing-experience-2020/</guid>
+      <description>In late summer of 2020 I moved from freelance software engineer to a full-time position. I want to outline this process for literally anybody who&amp;rsquo;s interested because I&amp;rsquo;ve found it useful when other people have done the same - like this post about interviewing at Google, this front-end, and this more generic post.
+Web development is a joyfully open community. There&amp;rsquo;s a lot of sharing, most often we share code, but we also share details about the wider context of our field.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html><head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Tiny Thought: Frontend Engineering is a Fullstack Problem - Thomas Wilson</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Tiny Thoughts are little (&lt;500 word) essays. They&rsquo;re concise.
+Hypothesis: Frontend engineering cannot exist in isolation from backend technologies.
+What sparked this: Thinking about building the next generation of web software at Oxwash.
+All software is either&hellip;
+ Used by a human for a human-scale (i.e. nebulous and larger) task like updating a status on social media, download a bank statement, or send a message. Used by other software to complete some computer-scale (i." />
+	<meta property="og:image" content=""/>
+	<meta property="og:title" content="Tiny Thought: Frontend Engineering is a Fullstack Problem" />
+<meta property="og:description" content="Tiny Thoughts are little (&lt;500 word) essays. They&rsquo;re concise.
+Hypothesis: Frontend engineering cannot exist in isolation from backend technologies.
+What sparked this: Thinking about building the next generation of web software at Oxwash.
+All software is either&hellip;
+ Used by a human for a human-scale (i.e. nebulous and larger) task like updating a status on social media, download a bank statement, or send a message. Used by other software to complete some computer-scale (i." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.thomaswilson.xyz/blog/2021-01-31-frontend-is-fullstack/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2021-01-31T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-01-31T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Tiny Thought: Frontend Engineering is a Fullstack Problem"/>
+<meta name="twitter:description" content="Tiny Thoughts are little (&lt;500 word) essays. They&rsquo;re concise.
+Hypothesis: Frontend engineering cannot exist in isolation from backend technologies.
+What sparked this: Thinking about building the next generation of web software at Oxwash.
+All software is either&hellip;
+ Used by a human for a human-scale (i.e. nebulous and larger) task like updating a status on social media, download a bank statement, or send a message. Used by other software to complete some computer-scale (i."/>
+<script src="https://www.thomaswilson.xyzjs/feather.min.js"></script>
+	
+	
+        <link href="https://www.thomaswilson.xyz/css/fonts.511ddb4c3eb5cc664ffce964174cebefda4d808569e219a7e5188466aa7713e6.css" rel="stylesheet">
+	
+
+	
+	<link rel="stylesheet" type="text/css" media="screen" href="https://www.thomaswilson.xyz/css/main.ecd799717c3d0b98bb2dca9498befc813ebe08241cce8dece74ccadb7dadced1.css" />
+		<link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://www.thomaswilson.xyz/css/dark.726cd11ca6eb7c4f7d48eb420354f814e5c1b94281aaf8fd0511c1319f7f78a4.css" media="(prefers-color-scheme: dark)"  />
+	
+	
+	
+</head>
+<body>
+        <div class="content"><header>
+	<div class="main">
+		<a href="https://www.thomaswilson.xyz">Thomas Wilson</a>
+	</div>
+	<nav>
+		
+		<a href="/blog">Blog</a>
+		
+		<a href="/book-reviews">Book reviews</a>
+		
+		
+	</nav>
+</header>
+
+<main>
+	<article>
+		<div class="title">
+			<h1 class="title">Tiny Thought: Frontend Engineering is a Fullstack Problem</h1>
+			<div class="meta">Posted on Jan 31, 2021</div>
+		</div>
+		
+
+		<section class="body">
+			<p><em>Tiny Thoughts</em> are little (&lt;500 word) essays. They&rsquo;re concise.</p>
+<p>Hypothesis: Frontend engineering cannot exist in isolation from backend technologies.</p>
+<p>What sparked this: Thinking about building the next generation of web software at <a href="https://www.oxwash.com">Oxwash</a>.</p>
+<p>All software is either&hellip;</p>
+<ol>
+<li>Used by a human for a human-scale (i.e. nebulous and larger) task like updating a status on social media, download a bank statement, or send a message.</li>
+<li>Used by other software to complete some computer-scale (i.e. smaller and specific) task like upload a file to S3, compress an image, query a database.</li>
+</ol>
+<p>Frontend software is, by definition, the bit used by humans. Good frontend software makes the human user aware of what they can(not) do, and what&rsquo;s going on in the system. How many unread messages do I have? What class do I have at 4pm this Thursday?</p>
+<p>This information is communicated in the User Interface (UI). UIs are interpreted by humans. The metaphors and language developed during design then used in UI are intended solely to communicate and explain. Humans can bend, abstract, and change concepts or language. So although UIs <em>should</em> be consistent, they can not be. You can present your blog page as a &ldquo;recent articles&rdquo; page, and as a list view for the <code>posts</code> table in your database. Both are true, but have different ideas about how &ldquo;computery&rdquo; an app is.</p>
+<p>When a human tells the UI that they wish to <em>do</em> something, the UI then has to talk to another bit of software. Software cannot bend, abstract, or change its ideas. A blog post <em>is</em> a row in a database. Software has a pre-specified language of things it can do: the Application Programming Interface (API).</p>
+<p>Frontend engineering is about working with both APIs and UIs. The skill of a frontend engineer can be proxied by their ability to design one or both. It&rsquo;s a skill because if you make these languages too similar, you risk a UI which is too technical or an API which is too inflexible.</p>
+<p>A lot of engineers write code for engineers. I&rsquo;ve seen (and written) &ldquo;clean&rdquo; code which prematurely optimised and abstracted. This does not guarantee a good Developer Experience (DX) when you actually <em>use</em> the API. Nor does it make the user experience or product quality inherently better.</p>
+<p>These are strong code smells if I&rsquo;m building version 1, or the API only has one consumer.</p>
+<p>As a frontend engineers, we have to advocate for users and software, situation depending. We should make better interfaces.</p>
+<p>Recognising the need to design singular interfaces (APIs and UIs), and using a shared language is GraphQL&rsquo;s fundamental distinction from REST. GraphQL acknowledges that provider and consumer need to know about each other.</p>
+<p>If your product <em>is</em> an API you should think especially hard about clear concepts and language.</p>
+
+		</section>
+
+		<div class="post-tags">
+			
+			
+			<nav class="nav tags">
+				<ul class="tags">
+					
+					<li><a href="/tags/tinythought">tinythought</a></li>
+					
+					<li><a href="/tags/essay">essay</a></li>
+					
+					<li><a href="/tags/fullstack">fullstack</a></li>
+					
+				</ul>
+			</nav>
+			
+			
+		</div>
+	</article>
+</main>
+<footer>
+<hr>
+	2021 
+   
+    © Thomas Wilson 
+   
+</footer>
+</div>
+    </body>
+</html>

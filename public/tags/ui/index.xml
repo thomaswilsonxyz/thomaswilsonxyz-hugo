@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ui on Thomas Wilson</title>
+    <link>https://www.thomaswilson.xyz/tags/ui/</link>
+    <description>Recent content in ui on Thomas Wilson</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-uk</language>
+    <copyright>© Thomas Wilson</copyright>
+    <lastBuildDate>Sat, 06 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://www.thomaswilson.xyz/tags/ui/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>The Frustrating Mismatch of Design by User Journey but Build with Components </title>
+      <link>https://www.thomaswilson.xyz/blog/2021-03-06-design-workflow-build-components/</link>
+      <pubDate>Sat, 06 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.thomaswilson.xyz/blog/2021-03-06-design-workflow-build-components/</guid>
+      <description>How do you design a good app?
+It&amp;rsquo;s a charmingly amateurish question, but I&amp;rsquo;ve spent the past five years primarily trying to design and build web apps and I don&amp;rsquo;t know the answer.
+I regularly get sick of looking at my current and old designs and ask &amp;ldquo;why don&amp;rsquo;t these look like a competent adult made them, and can I make them actually good?&amp;rdquo;. I&amp;rsquo;ll typically then do two things:</description>
+    </item>
+    
+  </channel>
+</rss>
