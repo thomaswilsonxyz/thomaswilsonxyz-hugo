@@ -2,7 +2,7 @@
 
 <h1 class="page-title">{{ .Title }}</h1>
 {{ $listCss := resources.Get "css/list.css" | fingerprint }}
-<link href="{{$listCss.Permalink}}" rel="stylesheet">
+<link href="{{$listCss.RelPermalink}}" rel="stylesheet">
 
 {{ .Content  }}
 

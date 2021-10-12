@@ -1,6 +1,6 @@
 <head>
   {{ $style := resources.Get "css/main.css" }}
   {{ $homeStyle := resources.Get "css/home.css" }}
-  <link rel="stylesheet" href="{{ $style.Permalink }}">
-  <link rel="stylesheet" href="{{ $homeStyle.Permalink }}">
+  <link rel="stylesheet" href="{{ $style.RelPermalink }}">
+  <link rel="stylesheet" href="{{ $homeStyle.RelPermalink }}">
 </head>
