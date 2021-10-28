@@ -9,11 +9,11 @@ paginate=5 # articles per page
 
 [params]
   description = 'Thomas Wilson is a software engineer who works with socially responsible companies, living in Oxford.'
-	mode="auto" # color-mode → light,dark,toggle or auto
-	useCDN=false # don't use CDNs for fonts and icons, instead serve them locally.
-	Subtitle = ""
+  mode="auto" # color-mode → light,dark,toggle or auto
+  useCDN=false # don't use CDNs for fonts and icons, instead serve them locally.
+  Subtitle = ""
   BioStrapLine="I build good software and engineering teams with good<span class='bio__star'>*<span> companies"
-  BioStrapLineCaveat="Companies actively working to solve environmental and social issues, not companies building invasive, immoral, or exploitative tools.
+  BioStrapLineCaveat="Companies actively working to solve environmental and social issues, not companies building invasive, immoral, or exploitative tools."
   BioListItems = [
     "I am currently leading the engineering team at [Oxwash](https://www.oxwash.com) to help build the future of Laundry.",
     "I write on my [blog](/blog).",
